@@ -60,20 +60,13 @@ void displayCarOptions(const CarOptions car) {
     printf("Power: %s\n", powers[car.power]);
     printf("Engine: %s\n", engines[car.engine]);
     printf("Sunroof: %s\n", (car.additionalOptions & SUNROOF_MASK) ? "Yes" : "No");
-    /* 
-       011
-       AND
-       001
-       ---
-       001
-    */
     printf("Premium Audio: %s\n", (car.additionalOptions & PREMIUM_AUDIO_MASK) ? "Yes" : "No");
     /*
-         011
-         AND
-         010
-         ---
-         010    
+        011
+        AND
+        010
+        ---
+        010    
     */
     printf("Sports Package: %s\n", (car.additionalOptions & SPORTS_PACKAGE_MASK) ? "Yes" : "No");
     /*
@@ -102,6 +95,30 @@ int main() {
         --------
         1011 0011 */
     displayCarOptions(myCar);
+    /*
+    Kết quả trả ra sẽ là:
+    Color: Black
+    Power: 150HP
+    Engine: 2.0L
+    Sunroof: Yes
+       011
+       AND
+       001
+       ---
+       001
+    Premium Audio: Yes
+        011
+        AND
+        010
+        ---
+        010
+    Sports Package: No
+        011
+        AND
+        100
+        ---
+        000
+    */
 
     unsetOption(&myCar, PREMIUM_AUDIO_MASK); 
     /*  1011 0011
@@ -114,7 +131,30 @@ int main() {
         --------
         1011 0001 */
     displayCarOptions(myCar);
-
+    /*
+    Kêt quả trả ra sẽ là:
+    Color: Black
+    Power: 150HP
+    Engine: 2.0L
+    Sunroof: Yes
+        001
+        AND
+        001
+        ---
+        001
+    Premium Audio: No
+        001
+        AND
+        010
+        ---
+        000
+    Sports Package: No
+        001
+        AND
+        100
+        ---
+        000
+    */
     printf("size of my car: %d\n", sizeof(CarOptions)); // 8 bits = 1 byte
 
     return 0;

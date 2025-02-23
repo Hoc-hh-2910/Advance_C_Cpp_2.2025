@@ -2,17 +2,18 @@
 #include <string.h>
 
 typedef struct {
-   char ten[50]; // 1 byte
+   char ten[50];        // 1 byte
    float diemTrungBinh; // 4 byte
-   int id; // 4 byte
+   int id;              // 4 byte
 } SinhVien;
 
 int stringCompare(const char *str1, const char *str2) {
-   while (*str1 && (*str1 == *str2)) {
+   while (*str1 && (*str1 == *str2)) // Nếu 2 kí tự bằng nhau và khác NULL
+   {
        str1++;
        str2++;
    }
-   return *(const unsigned char*)str1 - *(const unsigned char*)str2;
+   return *(const unsigned char*)str1 - *(const unsigned char*)str2; // Trả về hiệu 2 kí tự
 }
 
 
@@ -20,7 +21,7 @@ int stringCompare(const char *str1, const char *str2) {
 int compareByName(const void *a, const void *b) {
    SinhVien *sv1 = (SinhVien *)a; // Ép kiểu void* về SinhVien*
    SinhVien *sv2 = (SinhVien *)b; // Ép kiểu void* về SinhVien*
-   return stringCompare(sv1->ten, sv2->ten);
+   return stringCompare(sv1->ten, sv2->ten); // Vì tên là mảng nên không thể so sánh trực tiếp
 }
 
 // Hàm so sánh theo điểm trung bình
@@ -43,7 +44,8 @@ int compareByID(const void *a, const void *b) {
 }
 
 // Hàm sắp xếp chung
-void sort(SinhVien array[], size_t size, int (*compareFunc)(const void *, const void *)) {
+void sort(SinhVien array[], size_t size, int (*compareFunc)(const void *, const void *)) // Hàm nhận vào 1 hàm so sánh
+{
    int i, j;
    SinhVien temp;
    for (i = 0; i < size-1; i++)    
@@ -58,6 +60,7 @@ void sort(SinhVien array[], size_t size, int (*compareFunc)(const void *, const 
 void display(SinhVien *array, size_t size) {
    for (size_t i = 0; i < size; i++) {
        printf("ID: %d, Ten: %s, Diem Trung Binh: %.2f\n", array[i].id, array[i].ten, array[i].diemTrungBinh);
+       // In ra thông tin sinh viên
    }
    printf("\n");
 }
@@ -92,7 +95,11 @@ int main() {
 
    // Sắp xếp theo tên
    sort(danhSachSV, size, compareByName);
+   /*
+   Không cần truyền địa chỉ của hàm compareByName vì hàm compareByName đã được khai báo trước đó
+   Khi đó hàm sort sẽ gọi hàm compareByName để so sánh 2 phần tử
 
+   */
    display(danhSachSV, size);
 
    // Sắp xếp theo điểm trung bình

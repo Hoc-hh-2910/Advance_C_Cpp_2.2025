@@ -56,4 +56,6 @@ Trong trường hợp ">>", các bit ở bên trái sẽ được dịch sang ph
 int resultRightShift = num >> shiftAmount;
 ```
 
+# BÀI TẬP:
 
+**Đã được phân tích trong Ex4.c**
