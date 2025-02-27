@@ -48,6 +48,7 @@ void sort(SinhVien array[], size_t size, int (*compareFunc)(const void *, const 
 {
    int i, j;
    SinhVien temp;
+   // So sánh các phần tử đầu tiên với các phần tử còn lại
    for (i = 0; i < size-1; i++)    
        for (j = i+1; j < size; j++)
            if (compareFunc(array+i, array+j)>0) {
@@ -98,7 +99,7 @@ int main() {
    /*
    Không cần truyền địa chỉ của hàm compareByName vì hàm compareByName đã được khai báo trước đó
    Khi đó hàm sort sẽ gọi hàm compareByName để so sánh 2 phần tử
-
+   Kết quả sẽ là: Vy, Ngan, Tuan, Hoang
    */
    display(danhSachSV, size);
 
